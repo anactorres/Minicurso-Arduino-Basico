@@ -1,0 +1,21 @@
+/*
+  Blink
+  Liga um LED por um segundo, e desliga por um segundo infinitamente - Faz o LED piscar
+*/
+
+#define PIN_LED 2 //Aqui, define-se em qual pino estara o LED
+
+void setup() 
+{
+  // inicializa o pino digital PIN_LED como pino de saida "OUTPUT"
+  pinMode(PIN_LED, OUTPUT);
+}
+
+// A funçao loop roda infinitamente
+void loop() 
+{
+  digitalWrite(PIN_LED, HIGH);   // Liga o LED (HIGH é o nivel de tensao)
+  delay(1000);                       // Espera um segundo
+  digitalWrite(PIN_LED, LOW);    // Desliga o LED 
+  delay(1000);                       // Espera um segundo
+}
