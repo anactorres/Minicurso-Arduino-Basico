@@ -1,0 +1,25 @@
+/*
+  Usando o Monitor Serial
+  Contagem de 1 a 100
+*/
+
+int a = 1;
+int b = 100;
+bool condicao = !false;
+
+void setup()
+{
+	Serial.begin(9600); // Taxa de transmissao de dados em bits por segundo para transmissao de dados seriais
+}
+
+void loop()
+{
+	for (int i = 0; i < b; i++)
+	{
+		Serial.println(i);
+		delay(50);
+	}
+
+	while(!condicao){
+	    // loop infinito dentro de um loop infinito
+	}
