@@ -1,0 +1,35 @@
+
+//Declarando onde vou ligar os leds
+#define pinLEDvermelho 	9
+#define pinLEDamarelo	10
+#define pinLEDverde 	11
+
+/*Usando um array de pinos
+	const int pinos[] = {9,10,11};
+*/
+void setup()
+{
+	pinMode(pinLEDverde, OUTPUT);
+	pinMode(pinLEDamarelo, OUTPUT);
+	pinMode(pinLEDvermelho, OUTPUT);
+
+	/*Isso é equivalente a isso:
+	for (int i = 0; i <= (sizeof(pinos)/sizeof(int)); i++)
+	{
+		pinMode(pinos[i], OUTPUT);
+	}
+	*/
+}
+
+void loop()
+{
+	digitalWrite(pinLEDverde, HIGH);
+	delay(1000);
+	digitalWrite(pinLEDverde, LOW);
+	digitalWrite(pinLEDamarelo, HIGH);
+	delay(1000);
+	digitalWrite(pinLEDamarelo, LOW);
+	digitalWrite(pinLEDvermelho, HIGH);
+	delay(1000);
+	digitalWrite(pinLEDvermelho, LOW);
+}
