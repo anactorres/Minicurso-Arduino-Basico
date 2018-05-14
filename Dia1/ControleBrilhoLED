@@ -1,0 +1,23 @@
+
+#define pin_pot A0
+#define pin_LED 10
+
+int _valor_pot;
+float _tensao_pot;
+int _intensidade;
+
+void setup()
+{
+	pinMode(pin_LED, OUTPUT);
+}
+
+void loop()
+{
+	_valor_pot = analogRead(pin_pot);//Guarda o valor (de 0 a 1023) na variavel valor_pot
+	_tensao_pot = (float)_valor_pot*(5.0/1023.0);
+
+	//Estou reescalonando o valor do potenciometro de 1023 para 255
+	_intensidade = map(_valor_pot, 0, 1023, 255, 0);
+
+	analogWrite(pin_LED, _intensidade);
+}
