@@ -1,0 +1,87 @@
+/*
+MINICURSO DE ARDUINO - DIA 2
+
+Controle display de 7 segmentos
+*/
+#define pin_buz 3
+
+
+byte digitos [11][8] = 
+{
+	{0, 1, 1, 1, 1, 1, 1, 0}, // 0
+	{0, 1, 0, 0, 1, 0, 0, 0}, // 1
+	{0, 0, 1, 1, 1, 1, 0, 1}, // 2
+	{0, 1, 1, 0, 1, 1, 0, 1}, // 3
+	{0, 1, 0, 0, 1, 0, 1, 1}, // 4
+	{0, 1, 1, 0, 0, 1, 1, 1}, // 5
+	{0, 1, 1, 1, 0, 1, 1, 1}, // 6
+	{0, 1, 0, 0, 1, 1, 0, 0}, // 7
+	{0, 1, 1, 1, 1, 1, 1, 1}, // 8
+	{0, 1, 1, 0, 1, 1, 1, 1}, // 9
+	{1, 0, 0, 0, 0, 0, 0, 0} // Ponto
+};
+
+bool despertadorLigado = true;
+
+void setup()
+{
+	for(int i = 4; i < 12; i++)
+	 pinMode(i, OUTPUT);
+	pinMode(2, INPUT_PULLUP);
+	pinMode(3, OUTPUT);
+	attachInterrupt(2, desligaDespertador, LOW);
+	defineTempo(5);
+}
+
+void loop()
+{
+	delay(500);
+
+	if(despertadorLigado == true)
+	{
+		for (int i = 0; i < 5; i++)
+		{
+			analogWrite(pin_buz, 20);
+			delay(50);
+			analogWrite(pin_buz, 0);
+			delay(50);
+		}
+	}
+	if( digitalRead(2) == 0)
+		despertadorLigado = false;
+}
+
+void escreveDigito(int numero)
+{
+	for (int i = 0; i < 8; i++)
+	{
+		digitalWrite( (i + 4), digitos[numero][i]);
+	}
+}
+
+void defineTempo(int tempo)
+{
+	if(tempo > 20)
+		tempo = 20;
+
+	for (int i = tempo; i >= 0; i--)
+	{	
+		if(i > 9)
+		{
+			escreveDigito(i - 10);
+			digitalWrite(4, HIGH);
+		}
+		else
+		{
+			escreveDigito(i);
+			digitalWrite(4, LOW);
+		}
+
+
+		delay(1000);
+	}
+}
+void desligaDespertador()
+{
+	despertadorLigado = false;
+}
