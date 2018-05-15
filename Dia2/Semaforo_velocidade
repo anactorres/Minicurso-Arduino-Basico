@@ -1,0 +1,44 @@
+//Declarando onde vou ligar os leds
+#define pinLEDvermelho   9
+#define pinLEDamarelo 10
+#define pinLEDverde   11
+#define pin_pot 0
+
+int valorLido;
+void setup()
+{
+  pinMode(pinLEDverde, OUTPUT);
+  pinMode(pinLEDamarelo, OUTPUT);
+  pinMode(pinLEDvermelho, OUTPUT);
+
+  /*Isso é equivalente a isso:
+  for (int i = 0; i <= (sizeof(pinos)/sizeof(int)); i++)
+  {
+    pinMode(pinos[i], OUTPUT);
+  }
+  */
+}
+
+void loop()
+{ 
+  int _valor_pot;
+  int _tensao_pot;
+  int velocidade;
+
+  _valor_pot = analogRead(pin_pot);//Guarda o valor (de 0 a 1023) na variavel valor_pot
+  _tensao_pot = (float)_valor_pot*(5.0/1023.0);
+
+  //Estou reescalonando o valor do potenciometro de 1023 para 255
+  velocidade = map(_valor_pot, 0, 1023, 0, 1000);
+
+
+  digitalWrite(pinLEDverde, HIGH);
+  delay(velocidade);
+  digitalWrite(pinLEDverde, LOW);
+  digitalWrite(pinLEDamarelo, HIGH);
+  delay(velocidade);
+  digitalWrite(pinLEDamarelo, LOW);
+  digitalWrite(pinLEDvermelho, HIGH);
+  delay(velocidade);
+  digitalWrite(pinLEDvermelho, LOW);
+}
