@@ -1,0 +1,34 @@
+#define pinoLDR A4
+#define pinoLED 3
+
+int ldrValor = 0; //Valor lido do LDR
+int dimmer = 0;
+ 
+void setup() {
+ 	pinMode(pinoLED,OUTPUT);
+ 	Serial.begin(9600); //Inicia a comunicação serial
+}
+ 
+void loop() {
+
+	int aux = 0;
+	for (int i = 0; i < 30; i++)
+	{
+		aux += analogRead(pinoLDR); //aux = aux + analogRead(pinoLDR)
+		delay(20);
+	}
+
+	ldrValor = aux/30;
+ 
+ 	dimmer = map(ldrValor, 100, 800, 0, 255);
+
+ 	if(dimmer < 0)
+    dimmer = 0;
+  	if(dimmer > 255)
+    dimmer = 255;
+    
+  analogWrite(pinoLED, dimmer);
+
+ Serial.println(ldrValor);
+ delay(10);
+}
