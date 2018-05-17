@@ -1,0 +1,15 @@
+
+#define THERMISTORPIN A0 
+ 
+void setup() 
+{
+  Serial.begin(9600);
+}
+void loop() 
+{
+  float reading;
+  reading = analogRead(THERMISTORPIN);
+  Serial.print("Leitura analogica: "); 
+  Serial.println(reading);
+  delay(1000);
+}
